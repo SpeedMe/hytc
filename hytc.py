@@ -15,7 +15,7 @@ device = 'eth1'
 temp_file_path = '/root/hytc_temp.txt'
 temp_count = 1
 command = '/usr/local/iftop/sbin/iftop -i ' + device + ' -N -n -B -P -s 2 -L 2 -o 2s -t > ' + temp_file_path
-tc_command = 'tcset --change --device ' + device + ' --direction outgoing --rate ' + user_bandwidth + 'M --network '
+tc_command = 'tcset --add --device ' + device + ' --direction outgoing --rate ' + user_bandwidth + 'M --network '
 clean_tc_command = 'tcdel --device ' + device + ' --all'
 reip = re.compile(r'(?<![\.\d])(?:\d{1,3}\.){3}\d{1,3}(?![\.\d])')
 
