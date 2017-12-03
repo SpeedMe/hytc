@@ -49,11 +49,11 @@ def get_param(file_path, num):
     user_max_traffic = user_traffics_arr[0]
     user_ip = reip.findall(user_ip_line)[0]
     total_traffic = ','.join(filter(lambda x: x, total_tc_line.split(':')[1].split(' '))).split(',')[0]
-    return (user_traffic_line, user_ip, user_max_traffic, total_traffic)
+    return (user_traffic_line, user_ip_line, user_ip, user_max_traffic, total_traffic)
 
 
 def run_analyze(num):
-    user_traffic_line, user_ip, user_max_traffic, total_traffic = get_param(temp_file_path, num)
+    user_traffic_line, user_ip_line, user_ip, user_max_traffic, total_traffic = get_param(temp_file_path, num)
     logging.info('num:%d, ip:%s, mx:%s, total:%s', num, user_ip, user_max_traffic, total_traffic)
     if ':1123' not in user_traffic_line and ':1123' not in user_ip_line:
         analyze_traffic(user_ip, user_max_traffic, total_traffic)
