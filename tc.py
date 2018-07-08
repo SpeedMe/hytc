@@ -59,10 +59,10 @@ def get_param(file_path, num):
 def run_analyze(num):
     user_traffic_line, user_ip_line, user_ip, user_max_traffic, total_traffic = get_param(temp_file_path, num)
     logging.info('num:%d, ip:%s, mx:%s, total:%s', num, user_ip, user_max_traffic, total_traffic)
-    is_white_port = false
+    is_white_port = False
     for white_port in white_port_list:
       if white_port in user_traffic_line or white_port in user_ip_line:
-        is_white_port = true
+        is_white_port = True
     
     if not is_white_port:
       analyze_traffic(user_ip, user_max_traffic, total_traffic)
