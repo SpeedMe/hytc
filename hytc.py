@@ -11,9 +11,10 @@ logging.basicConfig(format='%(asctime)s [line:%(lineno)d] %(levelname)s %(messag
 server_limit_bandwidth = 20.00
 user_bandwidth = '6.5'
 device = 'eth1'
-
+white_port_list = [':20431']
 temp_file_path = '/root/hytc_temp.txt'
 temp_count = 1
+
 command = '/usr/local/iftop/sbin/iftop -i ' + device + ' -N -n -B -P -s 2 -L 2 -o 2s -t > ' + temp_file_path
 tc_command = 'tcset --add --device ' + device + ' --direction outgoing --rate ' + user_bandwidth + 'M --network '
 clean_tc_command = 'tcdel --device ' + device + ' --all'
@@ -55,7 +56,7 @@ def get_param(file_path, num):
 def run_analyze(num):
     user_traffic_line, user_ip_line, user_ip, user_max_traffic, total_traffic = get_param(temp_file_path, num)
     logging.info('num:%d, ip:%s, mx:%s, total:%s', num, user_ip, user_max_traffic, total_traffic)
-    if ':1123' not in user_traffic_line and ':1123' not in user_ip_line:
+    if white_port not in user_traffic_line and white_port not in user_ip_line:
         analyze_traffic(user_ip, user_max_traffic, total_traffic)
 
 
